@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kup&Kitab - Food Ordering</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #f8f9fa;
+        }
+        .logo img {
+            height: 80px;
+            /* Set the height */
+            width: 250px;
+            /* Set the width */
+            object-fit: contain;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px 0;
+        }
+
+        .quantity-controls button {
+            width: 30px;
+            height: 30px;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .quantity-controls input {
+            width: 50px;
+            text-align: center;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            height: 30px;
+        }
+
+        .cart-item {
+            margin-bottom: 10px;
+        }
+
+        .cart-item span {
+            margin-right: 10px;
+        }
+
+        #cart {
+            margin-top: 20px;
+        }
+
+        #home-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+
+        #home-content .description {
+            width: 45%;
+            text-align: center;
+        }
+
+        #home-content .restaurant-image {
+            width: 45%;
+        }
+
+        #home-content .restaurant-image img {
+            width: 100%;
+            height: auto;
+        }
+
+        .view-menu-button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .menu-container {
+            background-color: #f0f0f0;
+            /* Different background color */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .food-item {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .food-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .food-item h3 {
+            margin: 10px 0;
+        }
+
+        .food-item p.price {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .quantity-controls {
+            margin: 10px 0;
+        }
+
+        .menu-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .menu-buttons button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        footer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .contact-details {
+            margin-top: 20px;
+        }
+
+        .menu-container h2 {
+            text-align: center;
+        }
+
+        #home {
+            background-image: url('Butter Chicken with Garlic Naan.jpeg');
+            /* Update with your image path */
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            /* Full-screen height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <header>
+        <div class="logo">
+            <img src="pexels-photo-1640777.jpeg" alt="Kup&Kitab Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a onclick="showSection('home')">Home</a></li>
+                <li><a onclick="showSection('menu')">Menu</a></li>
+                <li><a onclick="showSection('cart')">Add to Cart</a></li>
+                <li><a onclick="showSection('User')">User</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home">
+        <div id="home-content">
+            <div class="description">
+                <h2>Welcome to Kup&Kitab!</h2>
+                <p>At Kup&Kitab, we bring you the best culinary experiences right to your doorstep. Our mission is to
+                    provide high-quality meals with excellent customer service. Explore our diverse menu, enjoy our
+                    special offers, and experience food like never before. Whether you're in the mood for a gourmet
+                    pizza, a juicy burger, or a classic pasta, we've got you covered!</p>
+                <button class="view-menu-button" onclick="showSection('menu')">View Menu</button>
+            </div>
+            <div class="restaurant-image">
+                <img src="./pexels-photo-1640777.jpeg" alt="Restaurant Image">
+            </div>
+        </div>
+    </section>
+
+    <section id="menu" class="hidden">
+        <div class="menu-container">
+            <h2>Menu</h2>
+            <div class="menu-grid">
+                <div class="food-item">
+                    <img src="./pexels-photo-1640777.jpeg" alt="Pizza" width="300">
+                    <h3>Pizza</h3>
+                    <p>Delicious cheese pizza with a variety of toppings.</p>
+                    <p class="price">Price: $10</p>
+                    <div class="quantity-controls">
+                        <button onclick="changeQuantity('pizza', -1)">-</button>
+                        <input type="text" id="pizza-quantity" value="0" readonly>
+                        <button onclick="changeQuantity('pizza', 1)">+</button>
+                    </div>
+                    <button onclick="addToCart('Pizza', 10)">Add to Cart</button>
+                </div>
+                <div class="food-item">
+                    <img src="./pexels-photo-1640777.jpeg" alt="Burger" width="300">
+                    <h3>Burger</h3>
+                    <p>Juicy beef burger with fresh lettuce and tomato.</p>
+                    <p class="price">Price: $8</p>
+                    <div class="quantity-controls">
+                        <button onclick="changeQuantity('burger', -1)">-</button>
+                        <input type="text" id="burger-quantity" value="0" readonly>
+                        <button onclick="changeQuantity('burger', 1)">+</button>
+                    </div>
+                    <button onclick="addToCart('Burger', 8)">Add to Cart</button>
+                </div>
+                <div class="food-item">
+                    <img src="./pexels-photo-1640777.jpeg" alt="Pasta" width="300">
+                    <h3>Pasta</h3>
+                    <p>Classic pasta with creamy Alfredo sauce.</p>
+                    <p class="price">Price: $12</p>
+                    <div class="quantity-controls">
+                        <button onclick="changeQuantity('pasta', -1)">-</button>
+                        <input type="text" id="pasta-quantity" value="0" readonly>
+                        <button onclick="changeQuantity('pasta', 1)">+</button>
+                    </div>
+                    <button onclick="addToCart('Pasta', 12)">Add to Cart</button>
+                </div>
+                <div class="food-item">
+                    <img src="./pexels-photo-1640777.jpeg" alt="Sushi" width="300">
+                    <h3>Sushi</h3>
+                    <p>Fresh sushi rolls with a variety of fillings.</p>
+                    <p class="price">Price: $15</p>
+                    <div class="quantity-controls">
+                        <button onclick="changeQuantity('sushi', -1)">-</button>
+                        <input type="text" id="sushi-quantity" value="0" readonly>
+                        <button onclick="changeQuantity('sushi', 1)">+</button>
+                    </div>
+                    <button onclick="addToCart('Sushi', 15)">Add to Cart</button>
+                </div>
+                <div class="food-item">
+                    <img src="./pexels-photo-1640777.jpeg" alt="Tacos" width="300">
+                    <h3>Tacos</h3>
+                    <p>Spicy tacos with fresh ingredients.</p>
+                    <p class="price">Price: $9</p>
+                    <div class="quantity-controls">
+                        <button onclick="changeQuantity('tacos', -1)">-</button>
+                        <input type="text" id="tacos-quantity" value="0" readonly>
+                        <button onclick="changeQuantity('tacos', 1)">+</button>
+                    </div>
+                    <button onclick="addToCart('Tacos', 9)">Add to Cart</button>
+                </div>
+                <div class="food-item">
+                    <img src="./pexels-photo-1640777.jpeg" alt="Salad" width="300">
+                    <h3>Salad</h3>
+                    <p>Healthy salad with fresh vegetables.</p>
+                    <p class="price">Price: $7</p>
+                    <div class="quantity-controls">
+                        <button onclick="changeQuantity('salad', -1)">-</button>
+                        <input type="text" id="salad-quantity" value="0" readonly>
+                        <button onclick="changeQuantity('salad', 1)">+</button>
+                    </div>
+                    <button onclick="addToCart('Salad', 7)">Add to Cart</button>
+                </div>
+                <div class="food-item">
+                    <img src="./pexels-photo-1640777.jpeg" alt="Sandwich" width="300">
+                    <h3>Sandwich</h3>
+                    <p>Grilled sandwich with cheese and ham.</p>
+                    <p class="price">Price: $6</p>
+                    <div class="quantity-controls">
+                        <button onclick="changeQuantity('sandwich', -1)">-</button>
+                        <input type="text" id="sandwich-quantity" value="0" readonly>
+                        <button onclick="changeQuantity('sandwich', 1)">+</button>
+                    </div>
+                    <button onclick="addToCart('Sandwich', 6)">Add to Cart</button>
+                </div>
+                <div class="food-item">
+                    <img src="./pexels-photo-1640777.jpeg" alt="Fries" width="300">
+                    <h3>Fries</h3>
+                    <p>Crispy golden fries.</p>
+                    <p class="price">Price: $5</p>
+                    <div class="quantity-controls">
+                        <button onclick="changeQuantity('fries', -1)">-</button>
+                        <input type="text" id="fries-quantity" value="0" readonly>
+                        <button onclick="changeQuantity('fries', 1)">+</button>
+                    </div>
+                    <button onclick="addToCart('Fries', 5)">Add to Cart</button>
+                </div>
+                <div class="food-item">
+                    <img src="./pexels-photo-1640777.jpeg" alt="Dessert" width="300">
+                    <h3>Dessert</h3>
+                    <p>Delicious dessert to end your meal.</p>
+                    <p class="price">Price: $6</p>
+                    <div class="quantity-controls">
+                        <button onclick="changeQuantity('dessert', -1)">-</button>
+                        <input type="text" id="dessert-quantity" value="0" readonly>
+                        <button onclick="changeQuantity('dessert', 1)">+</button>
+                    </div>
+                    <button onclick="addToCart('Dessert', 6)">Add to Cart</button>
+                </div>
+                <div class="food-item">
+                    <img src="./pexels-photo-1640777.jpeg" alt="Smoothie" width="300">
+                    <h3>Smoothie</h3>
+                    <p>Refreshing smoothie with fresh fruits.</p>
+                    <p class="price">Price: $7</p>
+                    <div class="quantity-controls">
+                        <button onclick="changeQuantity('smoothie', -1)">-</button>
+                        <input type="text" id="smoothie-quantity" value="0" readonly>
+                        <button onclick="changeQuantity('smoothie', 1)">+</button>
+                    </div>
+                    <button onclick="addToCart('Smoothie', 7)">Add to Cart</button>
+                </div>
+                <div class="food-item">
+                    <img src="./pexels-photo-1640777.jpeg" alt="Nachos" width="300">
+                    <h3>Nachos</h3>
+                    <p>Crispy nachos with melted cheese and toppings.</p>
+                    <p class="price">Price: $8</p>
+                    <div class="quantity-controls">
+                        <button onclick="changeQuantity('nachos', -1)">-</button>
+                        <input type="text" id="nachos-quantity" value="0" readonly>
+                        <button onclick="changeQuantity('nachos', 1)">+</button>
+                    </div>
+                    <button onclick="addToCart('Nachos', 8)">Add to Cart</button>
+                </div>
+                <div class="food-item">
+                    <img src="./pexels-photo-1640777.jpeg" alt="Grilled Chicken" width="300">
+                    <h3>Grilled Chicken</h3>
+                    <p>Juicy grilled chicken with a side of vegetables.</p>
+                    <p class="price">Price: $12</p>
+                    <div class="quantity-controls">
+                        <button onclick="changeQuantity('grilled-chicken', -1)">-</button>
+                        <input type="text" id="grilled-chicken-quantity" value="0" readonly>
+                        <button onclick="changeQuantity('grilled-chicken', 1)">+</button>
+                    </div>
+                    <button onclick="addToCart('Grilled Chicken', 12)">Add to Cart</button>
+                </div>
+            </div>
+            <div class="menu-buttons">
+                <button onclick="showSection('cart')">Place Order</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="cart" class="hidden">
+        <h2>Your Cart</h2>
+        <div id="cart-items"></div>
+        <p>Total Price: $<span id="total-price">0</span></p>
+        <button onclick="placeOrder()">Place Order</button>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Kup&Kitab. All rights reserved.</p>
+        <div class="contact-details">
+            <p>Email: support@kupandkitab.com</p>
+            <p>Phone: (123) 456-7890</p>
+        </div>
+    </footer>
+
+    <script>
+        let cart = [];
+        let total = 0;
+
+        function showSection(sectionId) {
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.getElementById(sectionId).classList.remove('hidden');
+        }
+
+        function changeQuantity(name, amount) {
+            const quantityInput = document.getElementById(name.toLowerCase() + '-quantity');
+            let quantity = parseInt(quantityInput.value) || 0;
+            quantity += amount;
+
+            if (quantity < 0) quantity = 0;
+            quantityInput.value = quantity;
+        }
+
+        function addToCart(name, price) {
+            const quantityInput = document.getElementById(name.toLowerCase() + '-quantity');
+            const quantity = parseInt(quantityInput.value) || 0;
+
+            if (quantity > 0) {
+                const existingItem = cart.find(item => item.name === name);
+                if (existingItem) {
+                    existingItem.quantity += quantity;
+                } else {
+                    cart.push({ name, price, quantity });
+                }
+                updateCart();
+                alert(`${name} added to cart.`);
+            }
+        }
+
+        function orderNow(name, price) {
+            const quantityInput = document.getElementById(name.toLowerCase() + '-quantity');
+            const quantity = parseInt(quantityInput.value) || 0;
+
+            if (quantity > 0) {
+                const existingItem = cart.find(item => item.name === name);
+                if (existingItem) {
+                    existingItem.quantity += quantity;
+                } else {
+                    cart.push({ name, price, quantity });
+                }
+                updateCart();
+                showSection('cart');
+                alert(`Order for ${quantity} ${name}(s) placed!`);
+            }
+        }
+
+        function updateCart() {
+            const cartItemsDiv = document.getElementById('cart-items');
+            const totalPriceSpan = document.getElementById('total-price');
+
+            cartItemsDiv.innerHTML = '';
+            total = 0;
+
+            cart.forEach(item => {
+                total += item.price * item.quantity;
+                cartItemsDiv.innerHTML += `
+                    <div class="cart-item">
+                        <span>${item.name}</span>
+                        <span>Quantity: ${item.quantity}</span>
+                        <span>Price: $${item.price}</span>
+                    </div>
+                `;
+            });
+
+            totalPriceSpan.textContent = total.toFixed(2);
+        }
+
+        function placeOrder() {
+            alert('Order placed successfully!');
+            cart = [];
+            total = 0;
+            updateCart();
+        }
+        function resetQuantities() {
+            // Reset all quantities to 0
+            const quantityInputs = document.querySelectorAll('.quantity-controls input[type="text"]');
+            quantityInputs.forEach(input => {
+                input.value = 0;
+            });
+        }
+    </script>
+</body>
+
+</html>
